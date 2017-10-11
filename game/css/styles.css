@@ -1,0 +1,26 @@
+.wholething{
+	text-align:center;
+}
+
+.things{
+	margin-left: auto;
+    margin-right: auto;
+
+	width:1000px;
+	height:600px;
+	
+}
+
+.cenarioPrincipal{
+	width:800px;
+	height:600px;
+	float:left;
+	background: gray;
+}
+
+.informacoes{
+	width:200px;
+	height:600px;
+	float:right;
+	background: orange;
+}
