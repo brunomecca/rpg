@@ -2,8 +2,7 @@
 	class ContatoDAO{
 		public static function cadastrar($nome, $email, $conteudo){
 			require "connect.php";
-
-			if(isset($_SESSION['usuario'])){
+			if(!MySession::naoLogado()){
 				$usuario = $_SESSION['id'];
 			}
 			else{

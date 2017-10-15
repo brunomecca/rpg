@@ -38,12 +38,3 @@
 </div>
 <br>
 
-
-<script>
-	function verify(){
-		var termos = document.getElementById("termos").checked;
-		if(!termos){
-			alert("Você deve aceitar os termos!");
-		}
-	}
-</script>

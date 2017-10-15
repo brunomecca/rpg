@@ -13,10 +13,10 @@
 				return;
 			}
 
-			if(UserDAO::login($login, $senha)){
+			else if(UserDAO::login($login, $senha)){
 				MySession::setUser($login);
 				MySession::setId(UserDAO::getUserId());
-				echo "<script>alert('Login efetuado!');</script>";
+				echo "<script>login();</script>";
 			}
 			else{
 				echo "<script>alert('Informações incorretas!');</script>";

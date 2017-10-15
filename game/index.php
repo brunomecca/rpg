@@ -12,7 +12,7 @@
 	if(ConfigDAO::manutencao()){
 		//server está em manutenção
 	}
-	if(!ConfigDAO::online()){
+	else if(!ConfigDAO::online()){
 		//server não está online
 	}
 

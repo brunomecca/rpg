@@ -10,7 +10,7 @@
 			$this->login();
 		}
 
-		public function login(){
+		public static function login(){
 			if(isset($_POST['acao']) && $_POST['acao'] == 'logar'){
 				$controller = new LoginController();
 				$controller->init();

@@ -4,7 +4,6 @@
 	<div class="imgbottom">
 		<img src="images/CubeGelatinous.png">
 		<img src="images/ninja.png">
-		<img src="images/archer.png">
 		<img src="images/barbarian.png">
 		<img src="images/cyborg.png">
 		<img src="images/deathCaster.png">
@@ -13,6 +12,7 @@
 		<img src="images/mutatedSpider.png">
 		<img src="images/subvampire.png">
 		<img src="images/superhero.png">
+		<img src="images/archer.png">
 	</div>
 </div>
 <div class="copyrights">Mundo Aventurado - 2017 - Web Browser Game

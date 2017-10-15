@@ -1,3 +1,8 @@
+body{
+
+	background-color: grey;
+}
+
 .wholething{
 	text-align:center;
 }
@@ -15,7 +20,13 @@
 	width:800px;
 	height:600px;
 	float:left;
-	background: gray;
+}
+
+.introScene{
+	width:800px;
+	height:600px;
+	float:left;
+	background-image: url("../images/mainscenario.gif");
 }
 
 .informacoes{
@@ -23,4 +34,41 @@
 	height:600px;
 	float:right;
 	background: orange;
+}
+
+
+.selectCharacter{
+	padding-top: 200px;
+	font-size:30px;
+	color:white;
+	
+
+}
+
+.sessionSelectCharacter{
+	  text-shadow: 
+    1px 0px 1px black, 0px 1px 1px black, 
+    2px 1px 1px black, 1px 2px 1px black,
+    3px 2px 1px black, 2px 3px 1px black,
+    4px 3px 1px black, 3px 4px 1px black,
+    5px 4px 1px black, 4px 5px 1px black,
+    6px 5px 1px black, 5px 6px 1px black,
+    7px 6px 1px black;
+
+}
+
+.sessionSelectCharacter a{
+	color:white;
+	text-decoration: none;
+}
+
+.sessionSelectCharacter a:visited{
+	color:white;
+	text-decoration: none;
+}
+
+
+.sessionSelectCharacter a:hover{
+	color:orange;
+	font-size:35px;
 }

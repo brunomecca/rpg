@@ -18,27 +18,55 @@
 		<div class="dark-panel">
 			<div class="dark-panel-top"></div>
 			<div class="dark-panel-center" id="parteDoLogin">
-				<ul>
-					<li>
-						<h1>Entrar</h1>
-					</li>
-					<li>
-						<p>Não perca tempo! <a href="?page=registro">Registre-se.</a></p>
-					</li>
+				<?php
+					if(MySession::naoLogado()){
+						?>
+						<ul>
+							<li>
+								<h1>Entrar</h1>
+							</li>
+							<li>
+								<p>Não perca tempo! <a href="?page=registro">Registre-se.</a></p>
+							</li>
 
-					<form action="" method="post" enctype="multipart/form-data">
-						<li class="username">
-							<input name="usuario" type="text" class="login-input" placeholder="Usuário" />
-						</li>
-						<li class="password">
-							<input name="senha" type="password" class="login-input" placeholder="Senha"/>
-						</li>
-						<input type="hidden" name="acao" value="logar">
-						<input type="submit" value="Entrar">
-						<!--<input type="submit" value="Entrar"> --> 
-					</form>
+							<form action="" method="post" enctype="multipart/form-data">
+								<li class="username">
+									<input name="usuario" type="text" class="login-input" placeholder="Usuário" id="usuario"/>
+								</li>
+								<li class="password">
+									<input name="senha" type="password" class="login-input" placeholder="Senha" id="senha"/>
+								</li>
+								<input type="hidden" name="acao" value="logar">
+								<input type="submit" value="Entrar">
+								<!--<input type="submit" value="Entrar"> --> 
+							</form>
 
-				</ul>
+						</ul>
+				<?php
+					}
+					else{
+
+						$img = findImg($_SESSION["id"]);
+						echo '<div class="parteDoLogin">
+									<div class="imgLogin"><a href="?page=editperfil"><img src="game/profilePics/'. $img .'"></a></div>
+									<div class="nomeLogin">'. $_SESSION["usuario"] .'</div>
+									<div class="editPerfil"><a href="?page=editperfil">editar perfil</a></div>
+									<div class="jogar"><a href="game/index.php" target="_blank">Jogar</a></div>
+							</div>';
+							echo '<div class="logout"><a href="?page=sair">Sair</a></div>';
+					}
+					
+					//foi decidido implementar uma função para achar a foto do perfil
+					function findImg($id){
+						require "connect.php";
+						$consulta = mysqli_query($link,"SELECT foto FROM game_usuarios WHERE id = '$id'");
+						foreach($consulta as $cons){
+							return $cons["foto"];
+						} 
+					}
+				?>
+
+				
 			</div>
 			<div class="dark-panel-bottom"></div>
 		</div>

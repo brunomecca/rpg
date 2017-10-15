@@ -4,8 +4,6 @@
 	setlocale( LC_ALL, 'pt_BR.utf-8', 'pt_BR', 'Portuguese_Brazil');
 	date_default_timezone_set('America/Sao_Paulo');
 
-	
-	
 	require_once "model/PostDAO.php";
 	require_once "model/UserDAO.php";
 	require_once "model/Usuario.php";
@@ -34,6 +32,17 @@
 	}
 	else if(isset($_GET['page']) && $_GET['page'] == 'registro'){
 		$controller = new RegistroController();
+	}
+	else if(isset($_GET['page']) && $_GET['page'] == 'sair'){
+		MySession::logout();
+		echo "<script>logout();</script>";
+		$controller = new HomeController();
+	}
+	else if(isset($_GET['page']) && $_GET['page'] == 'termos'){
+
+	}
+	else if(isset($_GET['page']) && $_GET['page'] == 'editperfil'){
+		
 	}
 
 	$controller->init();

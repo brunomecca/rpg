@@ -30,6 +30,27 @@
 					$ok = $this->verificarDados($nome,$usuario,$email,$confirmEmail,$senha,$confirmSenha, $newsletter);
 
 					if($ok){
+						if(!$this->size($nome)){
+							echo "<script>alert('Seu nome deve conter de 4 a 12 caracteres!');</script>";
+							return;
+						}
+						if(!$this->size($usuario)){
+							echo "<script>alert('Seu usuário deve conter de 4 a 12 caracteres!');</script>";
+							return;
+						}
+						if(!$this->size($email)){
+							echo "<script>alert('Seu email deve conter de 4 a 12 caracteres!');</script>";
+							return;
+						}
+						if(!$this->size($senha)){
+							echo "<script>alert('Sua senha deve conter de 4 a 12 caracteres!');</script>";
+							return;
+						}
+						if(!MyError::validaEmail($email)){
+							echo "<script>alert('Seu email não é válido!');</script>";
+							return;
+						}
+
 						$ok = $this->formularios($ok,$usuario,$email,$confirmEmail,$senha,$confirmSenha);
 						if($ok){
 							$termos = "sim";
@@ -43,6 +64,19 @@
 				}
 				
 			}
+	    }
+
+	    private function size($info){
+	    	if(strpos($info,"@")){
+	    		if(strlen($info) < 4 || strlen($info) > 30)
+	    			return false;
+	    	}
+	    	else{
+	    		if(strlen($info) < 4 || strlen($info) > 12 ){
+	    			return false;
+	    		}
+	    	}
+	    	return true;
 	    }
 
 	    private function formularios($ok, $usuario, $email, $confirmEmail, $senha, $confirmSenha){

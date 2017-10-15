@@ -19,11 +19,14 @@
 
 			require "view/single.php";
 
+			HomeController::login();
+			
 			//fazer o envio para bd
 			if(isset($_POST["acao"]) && $_POST["acao"] == "comentar"){
 
 				if(MyError::dadosIncorretos($_POST["conteudo"])){
-					//dados incorretos
+					echo "<script>alert('Caracteres proibidos!');</script>";
+					return;
 				}
 
 				$comentario = new Comentario($usuario, $_POST["conteudo"]);
