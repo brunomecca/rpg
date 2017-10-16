@@ -1,6 +1,6 @@
 <?php
 	//para enviar ao travis, tire o comentario da linha abaixo
-	require_once 'PHPUnit/Autoload.php';
+	//require_once 'PHPUnit/Autoload.php';
 	require_once 'model/MyError.php';
 	require_once 'model/MySession.php';
 
