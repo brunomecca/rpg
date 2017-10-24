@@ -9,6 +9,7 @@
 
 </head>
 <body>
+
 	<!-- div do segundo bg <div class="wrapper"> -->
 	<div id = "logo"><a href="index.php"><img src="images/mundoaventurado.png" alt="banner" /></a></div>
 	<br><div class="page">
@@ -46,7 +47,7 @@
 					}
 					else{
 
-						$img = findImg($_SESSION["id"]);
+						$img = UserDAO::findImg(MySession::getId());
 						echo '<div class="parteDoLogin">
 									<div class="imgLogin"><a href="?page=editperfil"><img src="game/profilePics/'. $img .'"></a></div>
 									<div class="nomeLogin">'. $_SESSION["usuario"] .'</div>
@@ -54,15 +55,6 @@
 									<div class="jogar"><a href="game/index.php" target="_blank">Jogar</a></div>
 							</div>';
 							echo '<div class="logout"><a href="?page=sair">Sair</a></div>';
-					}
-					
-					//foi decidido implementar uma função para achar a foto do perfil
-					function findImg($id){
-						require "connect.php";
-						$consulta = mysqli_query($link,"SELECT foto FROM game_usuarios WHERE id = '$id'");
-						foreach($consulta as $cons){
-							return $cons["foto"];
-						} 
 					}
 				?>
 

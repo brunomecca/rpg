@@ -89,5 +89,16 @@
 			}
 			return false;
 		}
+
+		public static function findImg($id){
+			require "connect.php";
+			
+			$consulta = mysqli_query($link,"SELECT foto FROM game_usuarios WHERE id = '$id'");
+			foreach($consulta as $cons){
+				return $cons["foto"];
+				
+			} 
+			return false;
+		}
 	}
 ?>

@@ -18,6 +18,13 @@
 				return false;
 		}
 
+		public static function getId(){
+			if(isset($_SESSION["id"]))
+				return $_SESSION["id"];
+			else
+				return false;
+		}
+
 		public static function setUser($usuario){
 			$_SESSION["usuario"] = $usuario;
 		}

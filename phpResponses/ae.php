@@ -1,8 +1,9 @@
 <?php
+	require "../model/MySession.php";
 	session_start();
 	if(isset($_SESSION["usuario"]) && isset($_SESSION["id"])){
 		
-		$img = findImg($_SESSION["id"]);
+		$img = findImg(MySession::getId());
 		echo '<div class="parteDoLogin">
 					<div class="imgLogin"><a href="?page=editperfil"><img src="game/profilePics/'. $img .'"></a></div>
 					<div class="nomeLogin">'. $_SESSION["usuario"] .'</div>
@@ -17,9 +18,14 @@
 
 	function findImg($id){
 		require "../connect.php";
+		
 		$consulta = mysqli_query($link,"SELECT foto FROM game_usuarios WHERE id = '$id'");
 		foreach($consulta as $cons){
 			return $cons["foto"];
+			
 		} 
+		return false;
 	}
+
+	
 ?>

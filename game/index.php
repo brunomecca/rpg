@@ -9,12 +9,6 @@
 		header('Location: ../index.php');
 	}
 
-	if(ConfigDAO::manutencao()){
-		//server está em manutenção
-	}
-	else if(!ConfigDAO::online()){
-		//server não está online
-	}
 
 	require_once "view/header.php";
 	require_once "view/unique.php";
