@@ -19,6 +19,7 @@
 
 
 <div class="wholething">
+
 	<div class="things">
 		<div class="cenarioPrincipal" id="cenarioPrincipal">
 			<div class="introScene">
@@ -32,7 +33,7 @@
 		</div>
 
 		<div class="informacoes" id="informacoes">
-			info
+
 		</div>
 	</div>
 </div>

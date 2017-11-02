@@ -21,16 +21,17 @@
 			<?php 
 				$info = "";
 				if($qtdePersonagens > 0){
-					$info = defineInfo(0);
+					$info = defineInfo(0,$personagens);
 				}
+
 			?>
-			$("#informacoes").html("<?php echo $info; ?>");
+			$("#informacoes").html("<?php echo $info;?>");
 		});
 		$("#selectDiv2").mouseenter(function(){
 			<?php 
 				$info = "";
 				if($qtdePersonagens > 1){
-					$info = defineInfo(1);
+					$info = defineInfo(1,$personagens);
 				}
 			?>
 			$("#informacoes").html("<?php echo $info; ?>");
@@ -39,7 +40,7 @@
 			<?php 
 				$info = "";
 				if($qtdePersonagens > 2){
-					$info = defineInfo(2);
+					$info = defineInfo(2,$personagens);
 				}
 			?>
 			$("#informacoes").html("<?php echo $info; ?>");
@@ -48,7 +49,7 @@
 			<?php 
 				$info = "";
 				if($qtdePersonagens > 3){
-					$info = defineInfo(3);
+					$info = defineInfo(3,$personagens);
 				}
 			?>
 			$("#informacoes").html("<?php echo $info; ?>");
@@ -57,19 +58,37 @@
 			<?php 
 				$info = "";
 				if($qtdePersonagens > 4){
-					$info = defineInfo(4);
+					$info = defineInfo(4,$personagens);
 				}
 			?>
 			$("#informacoes").html("<?php echo $info; ?>");
 		});
+
+
+		$.each([1,2,3,4,5], function(index, value){
+			if($("#selectDiv"+value).text().match("CRIAR")){
+				$("#selectDiv"+value).click(function(){
+					$.ajax({
+						type: 'POST',
+						url: "phpResponses/createCharacter.php",
+						async: true,
+						success: function(response){
+							$("#title").html("NOVO PERSONAGEM");
+							$("#selectIntroScene").html(response);
+						}
+					});
+				});
+			}
+		});
+
 	});
 </script>
 
 <div class="selectOuterScene">
-	<div class="titleScene">
+	<div class="titleScene" id="title">
 		SELECIONE O PERSONAGEM
 	</div>
-	<div class="selectIntroScene">
+	<div class="selectIntroScene" id="selectIntroScene">
 
 		<?php
 			$selectDivNumber = 1;
@@ -79,7 +98,32 @@
 		?>
 
 				<div class="selectDivs" id="<?php echo $selectDiv;?>">
-					<?php echo $personagens[$i]->nome; ?>
+					<?php echo $personagens[$i]->nome;?>
+					<div class="characterImg">
+					<?php 
+						//faccao
+						if($personagens[$i]->faccao == 1){
+							$faccao = '<img src="images/milestone.png">';
+						}
+						else{
+							$faccao =  '<img src="images/goldthorn.png">';
+						}	
+						//classe personagem
+						if($personagens[$i]->classe == 1){
+							echo 'Herói<br>';
+							echo '<img src="images/classes/superhero.png"><br>';
+							echo 'Nível: ' .  $personagens[$i]->nivel . "<br><br><br>";
+						}
+						else{
+							echo 'Ladino<br>';
+							echo '<img src="images/classes/thief.png"><br>';
+							echo 'Nível: ' .  $personagens[$i]->nivel . "<br><br><br>";
+						}
+						echo $faccao;
+					?>
+					</div>
+					
+
 				</div>
 
 		<?php
@@ -103,7 +147,89 @@
 </div>
 
 <?php 
-	function defineInfo($posicaoArray){
-		return $posicaoArray;
+	// TODO
+	function defineInfo($i,$personagens){
+		$widthVida = round(170 * intval($personagens[$i]->vida) / intval($personagens[$i]->vidaMaxima));
+		$retorno = "
+			<div class='containerInfo'>
+				<div class='namePersonagem'>
+					" . $personagens[$i]->nome . "
+				</div>
+
+				<div class='classePersonagem'>
+					". $personagens[$i]->classe . "
+				</div>
+
+				<div class='vidaPersonagem'>
+					Vida
+					<div class='vidaBar'>
+
+						<div style='background-color:#00CC00; width:".$widthVida."px; height:20px; float:left;'>
+						</div>
+					</div>
+					<div style='font-size:13px;'>
+					" . $personagens[$i]->vida . "/". $personagens[$i]->vidaMaxima."
+					</div>
+				</div>
+
+				<div class='equipamentosPersonagem'>
+					<div class='primeiraMao'>
+						<div class='primeiraMaoImg'>
+							<img src='images/item1.png'>
+						</div>
+						<div class='primeiraMaoText'>
+							Text Primeira Mao
+						</div>		
+					</div>
+
+					<div class='segundaMao'>
+						<div class='segundaMaoImg'>
+							<img src='images/item1.png'>
+						</div>
+						<div class='segundaMaoText'>
+							Text Segunda Mao
+						</div>		
+					</div>
+
+					<div class='equipamentoSection'>
+						<div class='equipamentoSectionImg'>
+							
+						</div>
+						<div class='equipamentoSectionText'>
+							armadura
+						</div>	
+					</div>
+
+					<div class='equipamentoSection'>
+						<div class='equipamentoSectionImg'>
+							
+						</div>
+						<div class='equipamentoSectionText'>
+							anel
+						</div>	
+					</div>
+
+					<div class='equipamentoSection'>
+						<div class='equipamentoSectionImg'>
+							
+						</div>
+						<div class='equipamentoSectionText'>
+							aura
+						</div>	
+					</div>
+				</div>
+
+				<div class='atributosPersonagem'>
+					atributosPersonagem
+				</div>
+
+			</div>";
+		return retirarQuebraDeLinhas($retorno);
+	}
+
+	function retirarQuebraDeLinhas($info){
+		$a = trim(preg_replace('/\s+/', ' ', $info));
+		return $a;
 	}
 ?>
+

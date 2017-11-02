@@ -6,26 +6,26 @@
     		<h2>Comece hoje mesmo a jogar!</h2>
     		<br>
     		<form action="" method="post" enctype="multipart/form-data">
-    			Nome:<br>
-    			<input type="text"  id="nome" name="nome" required="true">
-            	<br><br>
+    			Nome: <br>
+    			<input type="text"  id="nome" name="nome" required="true"> *
+            	<br><h5>4 a 12 caracteres</h5><br>
             	Usuário:<br>
-            	<input type="text" id="usuario" name="usuario" required="true">
-            	<br><br>
+            	<input type="text" id="usuario" name="usuario" required="true"> *
+            	<br><h5>4 a 12 caracteres</h5><br>
             	E-mail:<br>
-    			<input type="text" id="email" name="email" required="true">
-            	<br><br>
+    			<input type="text" id="email" name="email" required="true"> *
+            	<br><h5>4 a 30 caracteres</h5><br>
             	Confirmação de e-mail:<br>
-            	<input type="text" id="confirmEmail" name="confirmEmail" required="true">
+            	<input type="text" id="confirmEmail" name="confirmEmail" required="true"> *
             	<br><br>
             	Senha:<br>
-            	<input type="password" id="senha" name="senha" required="true">
-            	<br><br>
+            	<input type="password" id="senha" name="senha" required="true"> *
+            	<br><h5>4 a 12 caracteres</h5><br>
             	Confirmar senha:<br>
-            	<input type="password" id="confirmSenha" name="confirmSenha" required="true">
+            	<input type="password" id="confirmSenha" name="confirmSenha" required="true"> *
             	<br><br>
             	<input type="checkbox" name="newsletter" value="sim" checked>Desejo receber brindes, eventos e promoções no e-mail.<br>
-            	<input type="checkbox" name="termos" id="termos" onchange="verify()" value="sim">Aceito os <a href="?page=termos"> Termos e Condições</a> do jogo Mundo Aventurado.<br>
+            	<input type="checkbox" name="termos" id="termos" onchange="verify()" value="sim">Aceito os <a href="?page=termos"> Termos e Condições</a> do jogo Mundo Aventurado. *<br>
             	<br>
             	<input type="hidden" name="acao" value="registro">
             	<input type="submit" value="Cadastrar">
