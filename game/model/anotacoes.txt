@@ -1,0 +1,5 @@
+Dentro do jogo, os elementos são classificados pelos números:
+1 - Água; 2 - Fogo; 3 - Terra; 4 - Raio; 5 - Luz; 6 - Trevas; 7 - Natureza; 8 - Veneno; 0 - Neutro
+
+Os equipamentos também tem seu número correspondente:
+1 - Arma; 2 - Armadura; 3 - Utensílios ; 4 - Auras

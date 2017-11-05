@@ -13,11 +13,11 @@
 				$personagem->tabelaAtributo = $cons["tabelaAtributo"];
 				$personagem->tabelaElemento = $cons["tabelaElemento"];
 				$personagem->nivel = $cons["nivel"];
-				$personagem->aura = $cons["aura"];
-				$personagem->primeiraMao = $cons["primeiraMao"];
-				$personagem->segundaMao = $cons["segundaMao"];
-				$personagem->armadura = $cons["armadura"];
-				$personagem->utensilio = $cons["utensilio"];
+				$personagem->aura = ItemDAO::getItem($cons["aura"]);
+				$personagem->primeiraMao = ItemDAO::getItem($cons["primeiraMao"]);
+				$personagem->segundaMao = ItemDAO::getItem($cons["segundaMao"]);
+				$personagem->armadura = ItemDAO::getItem($cons["armadura"]);
+				$personagem->utensilio = ItemDAO::getItem($cons["utensilio"]);
 				$personagem->bau = $cons["bau"];
 				$personagem->faccao = $cons["faccao"];
 				$personagem->vida = $cons["vida"];

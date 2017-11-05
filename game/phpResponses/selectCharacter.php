@@ -1,8 +1,16 @@
 <?php
 	session_start();
 	require "../../connect.php";
+
 	require "../model/Personagem.php";
 	require "../model/PersonagemDAO.php";
+	require "../model/ItemDAO.php";
+	require "../model/Item.php";
+	require "../model/Arma.php";
+	require "../model/Armadura.php";
+	require "../model/Aura.php";
+	require "../model/Utensilio.php";
+
 
 	$usuario = $_SESSION["usuario"];
 	$id = $_SESSION["id"];
@@ -23,7 +31,7 @@
 				if($qtdePersonagens > 0){
 					$info = defineInfo(0,$personagens);
 				}
-
+				
 			?>
 			$("#informacoes").html("<?php echo $info;?>");
 		});
@@ -33,6 +41,7 @@
 				if($qtdePersonagens > 1){
 					$info = defineInfo(1,$personagens);
 				}
+				
 			?>
 			$("#informacoes").html("<?php echo $info; ?>");
 		});
@@ -42,6 +51,7 @@
 				if($qtdePersonagens > 2){
 					$info = defineInfo(2,$personagens);
 				}
+				
 			?>
 			$("#informacoes").html("<?php echo $info; ?>");
 		});
@@ -51,6 +61,7 @@
 				if($qtdePersonagens > 3){
 					$info = defineInfo(3,$personagens);
 				}
+				
 			?>
 			$("#informacoes").html("<?php echo $info; ?>");
 		});
@@ -60,6 +71,7 @@
 				if($qtdePersonagens > 4){
 					$info = defineInfo(4,$personagens);
 				}
+
 			?>
 			$("#informacoes").html("<?php echo $info; ?>");
 		});
@@ -175,46 +187,46 @@
 				<div class='equipamentosPersonagem'>
 					<div class='primeiraMao'>
 						<div class='primeiraMaoImg'>
-							<img src='images/item1.png'>
+							<img src='images/items/arma/" . $personagens[$i]->primeiraMao->arte ."'>
 						</div>
 						<div class='primeiraMaoText'>
-							Text Primeira Mao
+							" . $personagens[$i]->primeiraMao->nome ."
 						</div>		
 					</div>
 
 					<div class='segundaMao'>
 						<div class='segundaMaoImg'>
-							<img src='images/item1.png'>
+							<img src='images/items/arma/" . $personagens[$i]->segundaMao->arte ."'>
 						</div>
 						<div class='segundaMaoText'>
-							Text Segunda Mao
+							" . $personagens[$i]->segundaMao->nome ."
 						</div>		
 					</div>
 
 					<div class='equipamentoSection'>
 						<div class='equipamentoSectionImg'>
-							
+							<img src='images/items/armadura/" . $personagens[$i]->armadura->arte ."'>
 						</div>
 						<div class='equipamentoSectionText'>
-							armadura
+							" . $personagens[$i]->armadura->nome ."
 						</div>	
 					</div>
 
 					<div class='equipamentoSection'>
 						<div class='equipamentoSectionImg'>
-							
+							<img src='images/items/utensilio/" . $personagens[$i]->utensilio->arte ."'>
 						</div>
 						<div class='equipamentoSectionText'>
-							utensílio
+							" . $personagens[$i]->utensilio->nome ."
 						</div>	
 					</div>
 
 					<div class='equipamentoSection'>
 						<div class='equipamentoSectionImg'>
-							
+							<img src='images/items/aura/" . $personagens[$i]->aura->arte ."'>
 						</div>
 						<div class='equipamentoSectionText'>
-							aura
+							" . $personagens[$i]->aura->nome ."
 						</div>	
 					</div>
 				</div>
