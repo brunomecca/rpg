@@ -105,16 +105,16 @@
 						if($personagens[$i]->faccao == 1){
 							$faccao = '<img src="images/milestone.png">';
 						}
-						else{
+						else if($personagens[$i]->faccao == 0){
 							$faccao =  '<img src="images/goldthorn.png">';
 						}	
 						//classe personagem
-						if($personagens[$i]->classe == 1){
+						if($personagens[$i]->classe == "Herói"){
 							echo 'Herói<br>';
 							echo '<img src="images/classes/superhero.png"><br>';
 							echo 'Nível: ' .  $personagens[$i]->nivel . "<br><br><br>";
 						}
-						else{
+						else if($personagens[$i]->classe == "Ladino"){
 							echo 'Ladino<br>';
 							echo '<img src="images/classes/thief.png"><br>';
 							echo 'Nível: ' .  $personagens[$i]->nivel . "<br><br><br>";
@@ -205,7 +205,7 @@
 							
 						</div>
 						<div class='equipamentoSectionText'>
-							anel
+							utensílio
 						</div>	
 					</div>
 
