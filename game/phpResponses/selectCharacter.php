@@ -170,13 +170,11 @@
 </div>
 
 <?php 
-	// TODO
 	function defineInfo($i,$personagens){
-
 		$widthVida = round(170 * intval($personagens[$i]->vida) / intval($personagens[$i]->vidaMaxima));
 		$retorno = "
 			<div class='containerInfo'>
-				<div class='namePersonagem'>
+				<div class='namePersonagem' id='namePersonagem'>
 					" . $personagens[$i]->nome . "
 				</div>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Nov-2017 às 01:17
+-- Generation Time: 14-Nov-2017 às 05:23
 -- Versão do servidor: 10.1.28-MariaDB
 -- PHP Version: 7.0.24
 
@@ -44,6 +44,24 @@ INSERT INTO `admin_usuarios` (`id`, `nome`, `senha`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `configs`
+--
+
+CREATE TABLE `configs` (
+  `online` int(11) NOT NULL,
+  `manutencao` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `configs`
+--
+
+INSERT INTO `configs` (`online`, `manutencao`) VALUES
+(1, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `game_arma`
 --
 
@@ -57,6 +75,15 @@ CREATE TABLE `game_arma` (
   `attElemento` int(11) NOT NULL,
   `tipo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `game_arma`
+--
+
+INSERT INTO `game_arma` (`id`, `nome`, `arte`, `ataque`, `raridade`, `elemento`, `attElemento`, `tipo`) VALUES
+(1, 'Flamejante', 'EspadaEmChamas.png', 35, 2, 2, 12, 1),
+(2, 'Lança Básica', 'Lanca.png', 23, 0, 0, 0, 1),
+(3, 'Machado Básico', 'MachadoBasico.png', 12, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -75,6 +102,15 @@ CREATE TABLE `game_armadura` (
   `tipo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `game_armadura`
+--
+
+INSERT INTO `game_armadura` (`id`, `nome`, `raridade`, `arte`, `defesa`, `elemento`, `attElemento`, `tipo`) VALUES
+(1, 'Couro Forte', 0, 'CouroBasico.png', 13, 0, 0, 2),
+(2, 'Dracônica', 2, 'Draconica.png', 46, 2, 12, 2),
+(3, 'Metal Gasto', 1, 'MetalGasto.png', 32, 0, 0, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -87,9 +123,53 @@ CREATE TABLE `game_aura` (
   `arte` text NOT NULL,
   `raridade` int(11) NOT NULL,
   `elemento` int(11) NOT NULL,
-  `attElemento` int(11) NOT NULL,
-  `tipo` int(11) NOT NULL
+  `attElemento` float NOT NULL,
+  `tipo` int(11) NOT NULL,
+  `inspirador` varchar(10) NOT NULL,
+  `attInspirador` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `game_aura`
+--
+
+INSERT INTO `game_aura` (`id`, `nome`, `arte`, `raridade`, `elemento`, `attElemento`, `tipo`, `inspirador`, `attInspirador`) VALUES
+(1, 'Arma do Pirata', 'ArmaDoPirata.png', 0, 0, 0, 4, 'ataque', 0.1),
+(2, 'Força de Hércules', 'ForcaDeHercules.png', 2, 7, 0.07, 4, 'forca', 8),
+(3, 'Tartaruga Real', 'TartarugaVerde.png', 1, 0, 0, 4, 'defesa', 0.12);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `game_bau`
+--
+
+CREATE TABLE `game_bau` (
+  `id` int(11) NOT NULL,
+  `game_personagem` int(11) NOT NULL,
+  `item` int(11) NOT NULL,
+  `tipoItem` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `game_bau`
+--
+
+INSERT INTO `game_bau` (`id`, `game_personagem`, `item`, `tipoItem`) VALUES
+(1, 19, 3, 1),
+(2, 19, 4, 2),
+(3, 20, 3, 1),
+(4, 20, 4, 2),
+(5, 20, 2, 1),
+(6, 20, 1, 1),
+(8, 20, 5, 2),
+(9, 20, 6, 2),
+(10, 20, 10, 3),
+(11, 20, 11, 3),
+(12, 20, 7, 4),
+(13, 20, 8, 4),
+(14, 21, 3, 1),
+(15, 21, 4, 2);
 
 -- --------------------------------------------------------
 
@@ -99,10 +179,52 @@ CREATE TABLE `game_aura` (
 
 CREATE TABLE `game_item` (
   `id` int(11) NOT NULL,
-  `tabelaItemReal` int(11) NOT NULL,
+  `tabelaItemReal` varchar(30) NOT NULL,
   `tipoItem` int(11) NOT NULL,
   `idEmTabelaReal` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `game_item`
+--
+
+INSERT INTO `game_item` (`id`, `tabelaItemReal`, `tipoItem`, `idEmTabelaReal`) VALUES
+(1, 'game_arma', 1, 1),
+(2, 'game_arma', 1, 2),
+(3, 'game_arma', 1, 3),
+(4, 'game_armadura', 2, 1),
+(5, 'game_armadura', 2, 2),
+(6, 'game_armadura', 2, 3),
+(7, 'game_aura', 4, 1),
+(8, 'game_aura', 4, 2),
+(9, 'game_aura', 4, 3),
+(10, 'game_utensilio', 3, 1),
+(11, 'game_utensilio', 3, 2),
+(12, 'game_utensilio', 3, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `game_missao`
+--
+
+CREATE TABLE `game_missao` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(30) NOT NULL,
+  `nvRecomendado` int(11) NOT NULL,
+  `qtdeInimigos` int(11) NOT NULL,
+  `descricao` text NOT NULL,
+  `recompensa` text NOT NULL,
+  `numeroMissao` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `game_missao`
+--
+
+INSERT INTO `game_missao` (`id`, `titulo`, `nvRecomendado`, `qtdeInimigos`, `descricao`, `recompensa`, `numeroMissao`) VALUES
+(1, 'A maldição dos Cinzentos', 1, 4, 'A tribo dos Cinzentos estão tramando algo novamente. Eles são muito estranhos! Equipe uma arma e veja se pode dar um jeito neles. Chegaram informações que são 4. Lembre-se que eles podem carregar armas também, além de serem magos!', '2x Baú de madeira', 0),
+(4, 'Os esqueletos reais', 3, 6, 'Nos tempos antigos essas terras eram dominadas pela família real Loriak. Eles não eram nada honestos e não tinha um ser vivo que gostava da presença deles. Certo dia, após as negociações com bruxas famosas do reino, eles decidiram não cumprir com o acordo. Então, com todo o ódio, as bruxas se reuniram e lançaram uma magia que daria vida eterna à família real, porém o resultado não foi o esperado.', '3x Baú de madeira\r\n1x Baú de prata', 1);
 
 -- --------------------------------------------------------
 
@@ -136,8 +258,11 @@ CREATE TABLE `game_personagem` (
 --
 
 INSERT INTO `game_personagem` (`id`, `nome`, `classe`, `tabelaAtributo`, `tabelaElemento`, `bau`, `usuarioOwner`, `nivel`, `aura`, `primeiraMao`, `segundaMao`, `armadura`, `utensilio`, `faccao`, `vida`, `xp`, `vidaMaxima`, `xpProximoNv`) VALUES
-(1, 'Aplanke', 1, 1, 1, 1, 1, 10, 0, 0, 0, 0, 0, 1, 100, 0, 100, 0),
-(2, 'brucho71', 2, 2, 2, 2, 1, 2, 0, 0, 0, 0, 0, 0, 49, 0, 1000, 0);
+(1, 'Aplanke', 1, 1, 1, 1, 1, 10, 7, 0, 1, 4, 11, 1, 100, 0, 100, 0),
+(2, 'brucho71', 2, 2, 2, 2, 1, 2, 7, 2, 1, 4, 11, 0, 49, 0, 1000, 0),
+(19, 'Jovem', 1, 14, 14, 0, 1, 1, 0, 0, 0, 0, 0, 0, 80, 0, 80, 120),
+(20, 'aaaaa', 1, 15, 15, 0, 1, 1, 0, 0, 0, 0, 0, 1, 80, 0, 80, 120),
+(21, 'xmcmkzxc', 2, 16, 16, 0, 1, 1, 0, 0, 0, 0, 0, 1, 100, 0, 100, 120);
 
 -- --------------------------------------------------------
 
@@ -154,6 +279,17 @@ CREATE TABLE `game_tabelaatributo` (
   `vitalidade` int(11) NOT NULL,
   `pontosDeRank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `game_tabelaatributo`
+--
+
+INSERT INTO `game_tabelaatributo` (`id`, `game_personagem`, `forca`, `iniciativa`, `vigor`, `vitalidade`, `pontosDeRank`) VALUES
+(1, 1, 12, 4, 10, 8, 0),
+(2, 2, 4, 12, 8, 10, 0),
+(14, 19, 12, 4, 10, 8, 0),
+(15, 20, 12, 4, 10, 8, 0),
+(16, 21, 4, 12, 8, 10, 0);
 
 -- --------------------------------------------------------
 
@@ -174,6 +310,17 @@ CREATE TABLE `game_tabelaelemento` (
   `veneno` int(11) NOT NULL,
   `neutro` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `game_tabelaelemento`
+--
+
+INSERT INTO `game_tabelaelemento` (`id`, `game_personagem`, `agua`, `terra`, `luz`, `natureza`, `fogo`, `raio`, `trevas`, `veneno`, `neutro`) VALUES
+(1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(14, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(15, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+(16, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -217,6 +364,15 @@ CREATE TABLE `game_utensilio` (
   `tipo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Extraindo dados da tabela `game_utensilio`
+--
+
+INSERT INTO `game_utensilio` (`id`, `nome`, `raridade`, `arte`, `aura`, `elemento`, `attElemento`, `tipo`) VALUES
+(1, 'Cinto Esmeralda', 1, 'CintoJoiaAzul.png', 3, 0, 0, 3),
+(2, 'Joia Laranja', 2, 'JoiaLaranja.png', 0, 2, 0, 3),
+(3, 'Mágica Dracônica', 4, 'MagicaVermelha.png', 0, 2, 0, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -253,7 +409,8 @@ INSERT INTO `main_comentarios` (`id`, `id_post`, `usuario`, `comentario`, `data`
 (88, '165', '1', 'Aee', '10 de outubro de 2017', 'nao'),
 (89, '165', '1', 'Teste aula', '10 de outubro de 2017', 'sim'),
 (90, '165', '1', 'daszccx', '10 de outubro de 2017', 'nao'),
-(91, '165', '1', 'zx', '10 de outubro de 2017', 'nao');
+(91, '165', '1', 'zx', '10 de outubro de 2017', 'nao'),
+(92, '165', '1', 'Isso é outro teste', '12 de novembro de 2017', 'nao');
 
 -- --------------------------------------------------------
 
@@ -339,9 +496,27 @@ ALTER TABLE `game_armadura`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `game_aura`
+--
+ALTER TABLE `game_aura`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `game_bau`
+--
+ALTER TABLE `game_bau`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `game_item`
 --
 ALTER TABLE `game_item`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `game_missao`
+--
+ALTER TABLE `game_missao`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -406,37 +581,55 @@ ALTER TABLE `admin_usuarios`
 -- AUTO_INCREMENT for table `game_arma`
 --
 ALTER TABLE `game_arma`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `game_armadura`
 --
 ALTER TABLE `game_armadura`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `game_aura`
+--
+ALTER TABLE `game_aura`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `game_bau`
+--
+ALTER TABLE `game_bau`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `game_item`
 --
 ALTER TABLE `game_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `game_missao`
+--
+ALTER TABLE `game_missao`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `game_personagem`
 --
 ALTER TABLE `game_personagem`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `game_tabelaatributo`
 --
 ALTER TABLE `game_tabelaatributo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `game_tabelaelemento`
 --
 ALTER TABLE `game_tabelaelemento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `game_usuarios`
@@ -448,13 +641,13 @@ ALTER TABLE `game_usuarios`
 -- AUTO_INCREMENT for table `game_utensilio`
 --
 ALTER TABLE `game_utensilio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `main_comentarios`
 --
 ALTER TABLE `main_comentarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `main_contato`

@@ -9,6 +9,13 @@
 		header('Location: ../index.php');
 	}
 
+	if(ConfigDAO::manutencao()){
+		header('Location: ../index.php');
+	}
+
+	if(!ConfigDAO::online()){
+		header('Location: ../index.php');
+	}
 
 	require_once "view/header.php";
 	require_once "view/unique.php";

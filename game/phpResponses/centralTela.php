@@ -34,7 +34,9 @@
 					$("#descricaoMissao").html(data);
 					$("#waitForBtnJogar").html("<div class='btnGo'><button id='jogar' class='btnCreate'>JOGAR</button></div>");
 					$("#jogar").click(function(){
-						//fazer requisicao ajax para a missaoscreen.php
+						$.post("phpResponses/missaoScreen.php", {valor: i}).done(function(data) {
+							$("#cenarioPrincipal").html(data);
+						});
 					});
 				});
 			});

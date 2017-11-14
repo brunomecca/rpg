@@ -1,8 +1,15 @@
 <?php
-
+		
 ?>
 <script>
 	$(function(){
+
+		//pegando id do personagem
+		var name = $("#namePersonagem").text();
+		$.post("phpResponses/defineIdSession.php", {nome: name})
+		.done(function(data){
+			//debug aqui
+		});
 
 		//link do armazem
 		$("#armazem").click(function(){

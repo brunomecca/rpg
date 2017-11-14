@@ -53,8 +53,9 @@
 				$attIdToUpdate = $c["id"];
 			}
 			$consUpdateIdAtt = mysqli_query($link, "UPDATE game_personagem SET tabelaElemento = '$attIdToUpdate' WHERE id = '$idPersonagem'");
-			//faltabau
 			
+			$consInsertItem = mysqli_query($link,"INSERT INTO game_bau (game_personagem, item, tipoItem) VALUES ('$idPersonagem', 3, 1)");
+			$consInsertItem = mysqli_query($link,"INSERT INTO game_bau (game_personagem, item, tipoItem) VALUES ('$idPersonagem', 4, 2)");
 			echo "Criado com sucesso!";
 		}
 	}
