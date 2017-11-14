@@ -22,7 +22,6 @@
 ?>
 
 <script>
-	//para atualizar as info do lado no site >>>
 	$(function(){
 		//não da pra utilizar um .each aqui. se quiser, então deve-se utilizar uma outra chamada ajax
 		$("#selectDiv1").mouseenter(function(){
@@ -87,6 +86,18 @@
 						success: function(response){
 							$("#title").html("NOVO PERSONAGEM");
 							$("#selectIntroScene").html(response);
+						}
+					});
+				});
+			}
+			else{
+				$("#selectDiv"+value).click(function(){
+					$.ajax({
+						type: 'POST',
+						url: "phpResponses/telaPrincipal.php",
+						async: true,
+						success: function(response){
+							$("#cenarioPrincipal").html(response);
 						}
 					});
 				});
@@ -161,6 +172,7 @@
 <?php 
 	// TODO
 	function defineInfo($i,$personagens){
+
 		$widthVida = round(170 * intval($personagens[$i]->vida) / intval($personagens[$i]->vidaMaxima));
 		$retorno = "
 			<div class='containerInfo'>
@@ -232,7 +244,7 @@
 				</div>
 
 				<div class='atributosPersonagem'>
-					atributosPersonagem
+					
 				</div>
 
 			</div>";
@@ -242,6 +254,15 @@
 	function retirarQuebraDeLinhas($info){
 		$a = trim(preg_replace('/\s+/', ' ', $info));
 		return $a;
+	}
+
+	function checkIf0($obj, $itemNumber){
+		if($obj == 0){
+			return " ";
+		}
+			
+		
+		return $obj;
 	}
 ?>
 

@@ -2,6 +2,8 @@
 
 	class ItemDAO{
 		public static function getItem($id){
+			if($id == 0)
+				return new Item();
 			require "../../connect.php";
 
 			$consulta = mysqli_query($link, "SELECT * FROM game_item WHERE id = '$id'");
