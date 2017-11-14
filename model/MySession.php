@@ -3,8 +3,8 @@
 		public static function logout(){
 			unset($_SESSION["usuario"]);
 			unset($_SESSION["id"]);
-			session_destroy();
-			session_start();
+			
+			
 		}
 
 		public static function naoLogado(){

@@ -33,7 +33,7 @@
 			$this->assertEquals("bruno", MySession::getUser());
 			$this->assertEquals(1, MySession::getId());
 			$this->assertEquals(False, MySession::naoLogado());
-
+			$this->assertEquals(null, MySession::logout());
 			$this->assertEquals(null,MySession::setId(1));
 			
 		}
