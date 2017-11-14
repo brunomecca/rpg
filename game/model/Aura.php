@@ -10,7 +10,7 @@
 			$this->elemento = $item['elemento'];
 			$this->attElemento = $item['attElemento'];
 			$this->tipo = $item['tipo'];
-			$this->insipirador = $item['inspirador'];
+			$this->inspirador = $item['inspirador'];
 			$this->attInspirador = $item['attInspirador'];
 		}
 	}

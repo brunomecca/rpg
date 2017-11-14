@@ -54,6 +54,7 @@
 					$consulta3Arma = mysqli_query($link, "SELECT * FROM $tabela WHERE id = '$idEmTabelaReal'");
 					foreach($consulta3Arma as $arma){
 						$armaReal = new Arma($arma);
+						$armaReal->idGeral = $item;
 						$armas[] = $armaReal;
 					}
 				}
@@ -75,6 +76,7 @@
 					$consulta3Arma = mysqli_query($link, "SELECT * FROM $tabela WHERE id = '$idEmTabelaReal'");
 					foreach($consulta3Arma as $armadura){
 						$armaduraReal = new Armadura($armadura);
+						$armaduraReal->idGeral = $item;
 						$armaduras[] = $armaduraReal;
 					}
 				}
@@ -96,6 +98,7 @@
 					$consulta3utensilio = mysqli_query($link, "SELECT * FROM $tabela WHERE id = '$idEmTabelaReal'");
 					foreach($consulta3utensilio as $utensilio){
 						$utensilioReal = new Utensilio($utensilio);
+						$utensilioReal->idGeral = $item;
 						$utensilios[] = $utensilioReal;
 					}
 				}
@@ -117,6 +120,7 @@
 					$consulta3aura = mysqli_query($link, "SELECT * FROM $tabela WHERE id = '$idEmTabelaReal'");
 					foreach($consulta3aura as $aura){
 						$auraReal = new Aura($aura);
+						$auraReal->idGeral = $item;
 						$auras[] = $auraReal;
 					}
 				}

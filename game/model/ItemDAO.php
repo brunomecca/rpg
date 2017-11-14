@@ -1,6 +1,31 @@
 <?php
-
+	require "../model/Item.php";
+	require "../model/Arma.php";
+	require "../model/Armadura.php";
+	require "../model/Aura.php";
+	require "../model/Utensilio.php";
 	class ItemDAO{
+
+		public static function itemDoPersonagem($idItem, $idPersonagem){
+			require "../../connect.php";
+
+			$consulta = mysqli_query($link, "SELECT * FROM game_bau WHERE item = '$idItem' AND game_personagem = '$idPersonagem'");
+			foreach($consulta as $c){
+				return true;
+			}
+			return false;
+		}
+
+		public static function getAuraName($id){
+			require "../../connect.php";
+			if($id == 0){
+				return "Sem aura";
+			}
+			$consulta = mysqli_query($link, "SELECT nome FROM game_aura WHERE id = '$id'");
+			foreach($consulta as $c){
+				return $c["nome"];
+			}
+		}
 		public static function getItem($id){
 			if($id == 0)
 				return new Item();

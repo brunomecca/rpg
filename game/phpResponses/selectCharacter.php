@@ -5,11 +5,7 @@
 	require "../model/Personagem.php";
 	require "../model/PersonagemDAO.php";
 	require "../model/ItemDAO.php";
-	require "../model/Item.php";
-	require "../model/Arma.php";
-	require "../model/Armadura.php";
-	require "../model/Aura.php";
-	require "../model/Utensilio.php";
+
 
 
 	$usuario = $_SESSION["usuario"];
@@ -184,7 +180,7 @@
 
 				<div class='vidaPersonagem'>
 					Vida
-					<div class='vidaBar'>
+					<div class='vidaBar' id = 'vidaBarSection'>
 
 						<div style='background-color:#00CC00; width:".$widthVida."px; height:20px; float:left;'>
 						</div>
@@ -195,7 +191,7 @@
 				</div>
 
 				<div class='equipamentosPersonagem'>
-					<div class='primeiraMao'>
+					<div class='primeiraMao' id = 'primeiraMaoSection'>
 						<div class='primeiraMaoImg'>
 							<img src='images/items/arma/" . $personagens[$i]->primeiraMao->arte ."'>
 						</div>
@@ -204,7 +200,7 @@
 						</div>		
 					</div>
 
-					<div class='segundaMao'>
+					<div class='segundaMao' id='segundaMaoSection'>
 						<div class='segundaMaoImg'>
 							<img src='images/items/arma/" . $personagens[$i]->segundaMao->arte ."'>
 						</div>
@@ -213,7 +209,7 @@
 						</div>		
 					</div>
 
-					<div class='equipamentoSection'>
+					<div class='equipamentoSection' id='armaduraSection'>
 						<div class='equipamentoSectionImg'>
 							<img src='images/items/armadura/" . $personagens[$i]->armadura->arte ."'>
 						</div>
@@ -222,8 +218,8 @@
 						</div>	
 					</div>
 
-					<div class='equipamentoSection'>
-						<div class='equipamentoSectionImg'>
+					<div class='equipamentoSection' id='utensilioSection'>
+						<div class='equipamentoSectionImg' >
 							<img src='images/items/utensilio/" . $personagens[$i]->utensilio->arte ."'>
 						</div>
 						<div class='equipamentoSectionText'>
@@ -231,7 +227,7 @@
 						</div>	
 					</div>
 
-					<div class='equipamentoSection'>
+					<div class='equipamentoSection' id='auraSection'>
 						<div class='equipamentoSectionImg'>
 							<img src='images/items/aura/" . $personagens[$i]->aura->arte ."'>
 						</div>
