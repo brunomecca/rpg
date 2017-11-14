@@ -17,7 +17,7 @@
 		echo "<br>";
 		echo "</div>";
 
-		echo "<br>Lembre-se: ao sair da missão sem ir até o fina, você perderá todo o progresso!";
+		echo "<br>Lembre-se: ao sair da missão sem ir até o final, você perderá todo o progresso!";
 	}
 ?>
 
