@@ -185,7 +185,7 @@
 						<div style='background-color:#00CC00; width:".$widthVida."px; height:20px; float:left;'>
 						</div>
 					</div>
-					<div style='font-size:13px;'>
+					<div style='font-size:13px;' id='textVidaSection'>
 					" . $personagens[$i]->vida . "/". $personagens[$i]->vidaMaxima."
 					</div>
 				</div>
@@ -238,7 +238,9 @@
 				</div>
 
 				<div class='atributosPersonagem'>
-					
+					<div id='ataque'><strong>Ataque</strong>: " . $personagens[$i]->ataque . "</div>
+					<div id='iniciativaChar'><strong>Iniciativa</strong>: " . $personagens[$i]->iniciativa ."</div>
+					<div id='defesa'><strong>Defesa</strong>: " . $personagens[$i]->defesa . "</div>
 				</div>
 
 			</div>";

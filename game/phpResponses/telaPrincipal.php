@@ -9,6 +9,7 @@
 		$.post("phpResponses/defineIdSession.php", {nome: name})
 		.done(function(data){
 			//debug aqui
+			//pode deixar sem nada aqui
 		});
 
 		//link do armazem
@@ -28,6 +29,18 @@
 			$.ajax({
 				type: 'POST',
 				url: "phpResponses/centralTela.php",
+				async: true,
+				success: function(response){
+					$("#cenarioPrincipal").html(response);
+				}
+			});
+		});
+
+		//link do santuario
+		$("#santuario").click(function(){
+			$.ajax({
+				type: 'POST',
+				url: "phpResponses/santuarioTela.php",
 				async: true,
 				success: function(response){
 					$("#cenarioPrincipal").html(response);

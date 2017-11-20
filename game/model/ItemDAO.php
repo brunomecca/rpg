@@ -21,7 +21,11 @@
 			if($id == 0){
 				return "Sem aura";
 			}
-			$consulta = mysqli_query($link, "SELECT nome FROM game_aura WHERE id = '$id'");
+			$consulta = mysqli_query($link,"SELECT idEmTabelaReal FROM game_item WHERE id = '$id'");
+			foreach($consulta as $c){
+				$idTabelaReal = $c["idEmTabelaReal"];
+			}
+			$consulta = mysqli_query($link, "SELECT nome FROM game_aura WHERE id = '$idTabelaReal'");
 			foreach($consulta as $c){
 				return $c["nome"];
 			}

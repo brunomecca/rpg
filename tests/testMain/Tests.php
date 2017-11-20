@@ -69,7 +69,7 @@
 		public function test_contatoController(){
 			$home = new ContatoController();
 			$_POST["conteudo"] = "2'1'''@";
-			$_POST["email"] = 'kmdmkad2@f>';
+			$_POST["email"] = 'kmdmkad2f>';
 			$_POST["nome"] = "@#<!3,";
 			$_POST['acao'] = 'contato';
 			$this->assertEquals(null, $home->init());

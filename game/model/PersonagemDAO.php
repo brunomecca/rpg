@@ -25,6 +25,9 @@
 				$personagem->vidaMaxima = $cons["vidaMaxima"];
 				$personagem->xp = $cons["xp"];
 				$personagem->xpMaximo = $cons["xpProximoNv"];
+				$personagem->ataque = $cons["ataqueFull"];
+				$personagem->defesa = $cons["defesaFull"];
+				$personagem->iniciativa = $cons["iniciativaFull"];
 				$personagens[] = $personagem;
 			}
 
