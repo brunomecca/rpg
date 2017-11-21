@@ -57,6 +57,11 @@
 			$consInsertItem = mysqli_query($link,"INSERT INTO game_bau (game_personagem, item, tipoItem) VALUES ('$idPersonagem', 3, 1)");
 			$consInsertItem = mysqli_query($link,"INSERT INTO game_bau (game_personagem, item, tipoItem) VALUES ('$idPersonagem', 4, 2)");
 			echo "Criado com sucesso!";
+			
+			mysqli_query($link,"UPDATE game_personagem SET ataque = $forca * 2 WHERE id = '$idPersonagem'");
+			mysqli_query($link,"UPDATE game_personagem SET iniciativa = $iniciativa * 0.5 WHERE id = '$idPersonagem'");
+			mysqli_query($link,"UPDATE game_personagem SET ataqueFull = ataque WHERE id = '$idPersonagem'");
+			mysqli_query($link,"UPDATE game_personagem SET iniciativaFull = iniciativa WHERE id = '$idPersonagem'");
 		}
 	}
 	else{

@@ -13,26 +13,29 @@
 		echo "<script>alert('Esse item não é seu! Po');</script>";
 		return;
 	}
+	$tabelaElemento = 0;
+	//pegando tabela elemento
+	$consulta = mysqli_query($link,"SELECT tabelaElemento FROM game_personagem WHERE id = '$idPersonagem'");
+	foreach($consulta as $c){
+		$tabelaElemento = $c["tabelaElemento"];
+	}
 
 	$ataque = 0;
 	$defesa = 0;
 	$iniciativa = 0;
 
-	$cons = mysqli_query($link,"SELECT ataque,defesa,iniciativa FROM game_personagem WHERE id = '$idPersonagem'");
-	foreach($cons as $c){
-		$ataque = $c["ataque"];
-		$defesa = $c["defesa"];
-		$iniciativa = $c["iniciativa"];
-	}
-
 	$item = ItemDAO::getItem($id);
 
 	$local = "";
-	
+	$itemEquipadoAntes = "";
+
 	if($item->tipo == 1){
+
 		$ataqueArma = $item->ataque;
 
 		if($segundaMao == 2){
+			$itemEquipadoAntes = getItemEquipadoAntes("segundaMao", $idPersonagem);
+
 			$local = '"#segundaMaoSection"';
 			$info = "<div class='segundaMaoImg'>
 					<img src='images/items/arma/" . $item->arte ."'>
@@ -43,6 +46,7 @@
 				$consulta = mysqli_query($link,"UPDATE game_personagem SET segundaMao = '$id' WHERE id = '$idPersonagem'");
 		}
 		else{
+			$itemEquipadoAntes = getItemEquipadoAntes("primeiraMao", $idPersonagem);
 			$local = '"#primeiraMaoSection"';
 			$info = "<div class='primeiraMaoImg'>
 					<img src='images/items/arma/" . $item->arte ."'>
@@ -56,6 +60,7 @@
 
 	}
 	else if($item->tipo == 2){
+		$itemEquipadoAntes = getItemEquipadoAntes("armadura", $idPersonagem);
 		$defesaArmadura = $item->defesa;
 		$local = '"#armaduraSection"';
 		$info = "<div class='equipamentoSectionImg'>
@@ -67,6 +72,7 @@
 		$consulta = mysqli_query($link,"UPDATE game_personagem SET armadura = '$id' WHERE id = '$idPersonagem'");
 	}
 	else if($item->tipo == 3){
+		$itemEquipadoAntes = getItemEquipadoAntes("utensilio", $idPersonagem);
 		$local = '"#utensilioSection"';
 		$info = "<div class='equipamentoSectionImg'>
 						<img src='images/items/utensilio/" . $item->arte ."'>
@@ -77,7 +83,7 @@
 		$consulta = mysqli_query($link,"UPDATE game_personagem SET utensilio = '$id' WHERE id = '$idPersonagem'");
 	}
 	else if($item->tipo == 4){
-
+		$itemEquipadoAntes = getItemEquipadoAntes("aura", $idPersonagem);
 		$local = '"#auraSection"';
 		$info = "<div class='equipamentoSectionImg'>
 						<img src='images/items/aura/" . $item->arte ."'>
@@ -148,10 +154,10 @@
 	if(get_class($utensilio) != "Item"){
 		if($utensilio->aura != 0){
 			$auraUtensilio = ItemDAO::getItem($utensilio->aura);
-			if($auraUtensilio->insipirador == "ataque"){
+			if($auraUtensilio->inspirador == "ataque"){
 				$ataqueSomado = $ataqueSomado + ($ataqueSomado * $auraUtensilio->attInspirador);
 			}
-			if($auraUtensilio->insipirador == "iniciativa"){
+			if($auraUtensilio->inspirador == "iniciativa"){
 				$iniciativa = $iniciativa + ($iniciativa * $auraUtensilio->attInspirador);
 			}
 		}
@@ -181,14 +187,43 @@
 	foreach($consulta as $c){
 		$iniciativaFull = $c["iniciativaFull"];
 	}
+
+	//update tabela elemento
+
+	$elementoItemAtt = $item->attElemento;
+	$elementoItem = getElemento($item->elemento);
+	$retirarElemento = True;
+
+	if(get_class($itemEquipadoAntes) != "Item"){
+		if(get_class($itemEquipadoAntes) == "Utensilio"){
+			$aura = ItemDAO::getItem($itemEquipadoAntes->aura);
+			if(get_class($aura) != "Item"){
+				if($aura->elemento != 0){
+					$attARetirar = $aura->attElemento;
+					$elementoARetirar = getElemento($aura->elemento);
+				}
+				else{
+					$retirarElemento = False;
+				}
+			}
+		}
+		else{
+			$attARetirar = $itemEquipadoAntes->attElemento;
+			$elementoARetirar = getElemento($itemEquipadoAntes->elemento);
+		}
+		if($retirarElemento)
+			mysqli_query($link, "UPDATE game_tabelaelemento SET $elementoARetirar = $elementoARetirar - $attARetirar WHERE game_personagem = '$idPersonagem'");
+	}
+	mysqli_query($link,"UPDATE game_tabelaelemento SET $elementoItem = $elementoItem + $elementoItemAtt WHERE game_personagem = '$idPersonagem'");
+
 ?>
 
 <script>
 	$(function(){
 		$(<?php echo $local;?>).html("<?php echo $info;?>");
-		$("#ataque").html("<strong>Força</strong>:" + "<?php echo $ataque;?>");
-		$("#defesa").html("<strong>Defesa</strong>:" + "<?php echo $defesa;?>");
-		$("#iniciativaChar").html("<strong>Iniciativa</strong>:" + "<?php echo $iniciativa;?>");
+		$("#ataque").html("<strong>Ataque</strong>: " + "<?php echo $ataque;?>");
+		$("#defesa").html("<strong>Defesa</strong>: " + "<?php echo $defesa;?>");
+		$("#iniciativaChar").html("<strong>Iniciativa</strong>: " + "<?php echo $iniciativaFull;?>");
 		$.ajax({
 				type: 'POST',
 				url: "phpResponses/armazemTela.php",
@@ -202,3 +237,39 @@
 
 
 
+<?php
+
+	function getItemEquipadoAntes($campo, $idPersonagem){
+		require "../../connect.php";
+	
+		
+		$itemEquipadoAntes = new Item();
+		$consulta = mysqli_query($link,"SELECT $campo FROM game_personagem WHERE id = '$idPersonagem'");
+		foreach($consulta as $c){
+			$itemEquipadoAntes = ItemDAO::getItem($c["$campo"]);
+		}
+		return $itemEquipadoAntes;
+	}
+
+	function getElemento($id){
+		if($id == 0)
+			return "neutro";
+		if($id == 1)
+			return "agua";
+		if($id == 2)
+			return "fogo";
+		if($id == 3)
+			return "terra";
+		if($id == 4)
+			return "raio";
+		if($id == 5)
+			return "luz";
+		if($id == 6)
+			return "trevas";
+		if($id == 7)
+			return "natureza";
+		if($id == 8)
+			return "veneno";
+
+	}
+?>

@@ -3,7 +3,7 @@
 	require "../model/Missao.php";
 
 	$cons = mysqli_query($link,"SELECT * FROM game_missao");
-	$missoes = array();;
+	$missoes = array();
 	foreach($cons as $m){
 		$missao = new Missao();
 		$missao->titulo = $m["titulo"];
@@ -11,6 +11,7 @@
 		$missao->recompensa = $m["recompensa"];
 		$missao->nvRecomendado = $m["nvRecomendado"];
 		$missao->qtdeInimigos = $m["qtdeInimigos"];
+		$missao->doc = $m["doc"];
 		$missoes[] = $missao; 
 	}
 

@@ -1,5 +1,7 @@
 <?php
-		
+	session_start();
+	$_SESSION["inimigos"] = "";
+	$_SESSION["character"] = "";
 ?>
 <script>
 	$(function(){
@@ -47,6 +49,30 @@
 				}
 			});
 		});
+
+		//link da taverna
+		$("#taverna").click(function(){
+			$.ajax({
+				type: 'POST',
+				url: "phpResponses/tavernaTela.php",
+				async: true,
+				success: function(response){
+					$("#cenarioPrincipal").html(response);
+				}
+			});
+		});
+
+		$("#voltar").click(function(){
+			$.ajax({
+				type: 'POST',
+				url: "phpResponses/selectCharacter.php",
+				async: true,
+				success: function(response){
+					$("#cenarioPrincipal").html(response);
+				}
+			});
+		});
+
 	});
 </script>
 
@@ -54,19 +80,20 @@
 
 	<div class="options">
 		<div class="op" id="armazem">
-			Armazém
+		
 		</div>
 
 		<div class="op" id="taverna">
-			Taverna
+		
 		</div>
 
 		<div class="op" id="santuario">
-			Santuário			
+		
 		</div>
 
 		<div class="op" id="central">
-			Central
+		
 		</div>
 	</div>
+
 </div>

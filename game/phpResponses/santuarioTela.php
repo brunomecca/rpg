@@ -5,6 +5,26 @@
 	require "../../connect.php";
 	require "../model/ItemDAO.php";
 
+	//upando
+	$consulta = mysqli_query($link, "SELECT xp, xpProximoNv FROM game_personagem WHERE id = '$id'");
+	foreach($consulta as $c){
+		$xp = $c["xp"];
+		$xpProximoNv = $c["xpProximoNv"];
+		while($xp >= $xpProximoNv){
+			$xpProximoNv = $c["xpProximoNv"];
+			mysqli_query($link, "UPDATE game_personagem SET nivel = nivel + 1 WHERE id = '$id'");
+			mysqli_query($link, "UPDATE game_personagem SET pntsDisponiveis = pntsDisponiveis + 5 WHERE id = '$id'");
+			$xpProximoNv = $xpProximoNv * 1.8;
+			mysqli_query($link,"UPDATE game_personagem SET xpProximoNv = $xpProximoNv WHERE id = '$id'");
+			$consulta = mysqli_query($link, "SELECT xp, xpProximoNv FROM game_personagem WHERE id = '$id'");
+			foreach($consulta as $c){
+				$xp = $c["xp"];
+				$xpProximoNv = $c["xpProximoNv"];
+			}
+		}
+
+	}
+
 	$nivel = "";
 	$clase = "";
 	$xp = "";
