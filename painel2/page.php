@@ -28,10 +28,12 @@
 			$controller = new PageController("comentario");
 		else if($_GET["pg"] == "sair")
 			$controller = new PageController("sair");
+
 	}
-	else{
-		header("Location: index.php");
+	if(isset($_GET["reprovar"]) || isset($_GET["aprovar"])){
+		$controller = new PageController("comentario");
 	}
+	
 	$controller->init();
 ?>		
 

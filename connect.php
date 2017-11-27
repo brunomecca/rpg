@@ -1,5 +1,5 @@
 <?php
-	$link = mysqli_connect("localhost","root","","mundoaventurado");
+	$link = mysqli_connect("mysql.hostinger.com.br","u278340638_ae","naosei123","u278340638_ae");
 
 	
 	mysqli_query($link,"SET NAMES 'utf8'");

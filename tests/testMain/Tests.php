@@ -49,10 +49,7 @@
 			$_GET["pag"] = 1;
 			$this->assertEquals(1, PostDAO::numberPage());
 			
-			$this->assertEquals(PostDAO::retrievePosts(),PostDAO::retrievePosts());
-			$this->assertEquals(PostDAO::retriveComments(2), PostDAO::retriveComments(2));
-			$this->assertEquals(PostDAO::singlePost(2), PostDAO::singlePost(2));
-			$this->assertEquals(15, PostDAO::numberPosts());
+			$this->assertEquals(2, PostDAO::numberPosts());
 		}
 
 		public function test_comentario(){

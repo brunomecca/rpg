@@ -73,7 +73,21 @@
 		}
 
 		function comentario(){
+			require "../connect.php";
+			$comentario = mysqli_query($link,"SELECT * FROM main_comentarios WHERE status = 'nao'");
 			
+			require "view/admin/comentario.php";
+
+			if(isset($_GET["aprovar"])){
+				$idComment = $_GET["aprovar"];
+				$cons = mysqli_query($link,"UPDATE main_comentarios SET status = 'sim' WHERE id = '$idComment'");
+			}
+			if(isset($_GET["reprovar"])){
+				$idComment = $_GET["reprovar"];
+				
+				$cons = mysqli_query($link,"DELETE FROM main_comentarios WHERE id = '$idComment'");
+
+			}
 		}
 
 		function config(){

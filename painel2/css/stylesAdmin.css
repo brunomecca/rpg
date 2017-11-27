@@ -479,3 +479,34 @@ Paginacao
 	padding-top:15px;
 	text-align:center;
 }
+
+
+.comentarios{
+	width:400px;
+
+}
+
+
+.comentarioTotal{
+
+}
+
+.comentarioTotalUp{
+	margin-top:10px;
+}
+
+.btnsAcao{
+	width:200px;
+}
+.btnAprovar{
+	float:left;
+	margin-right:50px;
+	margin-left: 10px;
+}
+.btnReprovar{
+	float:left;
+}
+
+.dataComentario{
+	font-size:12px;
+}

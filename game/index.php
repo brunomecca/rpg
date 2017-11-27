@@ -3,7 +3,7 @@
 	setlocale( LC_ALL, 'pt_BR.utf-8', 'pt_BR', 'Portuguese_Brazil');
 	date_default_timezone_set('America/Sao_Paulo');
 
-	require_once "model/ConfigDao.php";
+	require_once "model/ConfigDAO.php";
 
 	if(!isset($_SESSION['usuario']) || $_SESSION['usuario'] == ''){
 		header('Location: ../index.php');
